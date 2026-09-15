@@ -8,3 +8,6 @@ students = [
 for i in range(len(students)):
     print(f"Student Name: {students[i]["name"]}")
     print(f"Student Marks: {students[i]["average_mark"]}")
+
+if {students["average_mark"]} >= 50:
+    print(f"Average Mark: {students["average_mark"]}")
