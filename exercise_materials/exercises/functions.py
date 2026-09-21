@@ -33,7 +33,7 @@ if __name__ == "__main__":
 
     print("Students with an average of 50% or higher:")
     for student in students:
-        if calc_average(student["marks"]) >= 50:
+        if float(calc_average(student["marks"])) >= 50:
             print(f"{student["name"]}")
 
 
