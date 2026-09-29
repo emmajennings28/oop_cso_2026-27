@@ -1,4 +1,5 @@
 from operator import length_hint
+from traceback import print_tb
 
 
 class Rectangle:
@@ -10,6 +11,8 @@ class Rectangle:
         print(f"Rectangle [Length: {self.length} , width = {self.width}, colour = {self.colour}]")
 
     def calc_area(self):
+        return self.length * self.width
+
 
 if __name__ == "__main__":
     rectangle_1 = Rectangle()
@@ -17,3 +20,25 @@ if __name__ == "__main__":
     print(f"Width: {rectangle_1.width}")
     print(f"Colour: {rectangle_1.colour}")
     rectangle_1.display()
+
+    rectangles = []
+
+    for i in range(2):
+        print(f"Rectangle {i+1}")
+
+        rectangle = Rectangle()
+
+        rectangle.length = float(input("Enter length"))
+        rectangle.width = float(input("Enter width"))
+        rectangle.colour = input("Enter colour")
+
+        rectangles.append(rectangle)
+
+    largest_rectangle = rectangles[0]
+    for rectangle in rectangles:
+        if rectangle.calc_area() > largest_rectangle.calc_area():
+            largest_rectangle = rectangle
+
+    print("The largest rectangle area is:")
+    largest_rectangle.display()
+    print(f"Area: {largest_rectangle.calc_area()}")
