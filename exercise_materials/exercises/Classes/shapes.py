@@ -42,3 +42,29 @@ if __name__ == "__main__":
     print("The largest rectangle area is:")
     largest_rectangle.display()
     print(f"Area: {largest_rectangle.calc_area()}")
+
+
+    smallest_width = rectangles[0].width
+    smallest_position = 0
+
+    for i in range(len(rectangles)):
+        if rectangles[i].width < smallest_width:
+            smallest_width = rectangles[i].width
+            smallest_position = i
+
+    print("Rectangle with the smallest width:")
+    print(f"Position in list: {smallest_position}")
+
+    red_rectangles = []
+
+    for rectangle in rectangles:
+        if rectangle.colour.lower() == "red":
+            red_rectangles.append(rectangle)
+
+    if len(red_rectangles) > 0:
+        print("Red rectangles:")
+
+        for rectangle in red_rectangles:
+            rectangle.display()
+    else:
+        print("There is no red rectangles")
