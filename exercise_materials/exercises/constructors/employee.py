@@ -11,7 +11,7 @@ class Employee:
 
 
     def display(self):
-        print(f"Employee[id: {self.id},first name: {self.firstname}, last name: {self.lastname}, salary: {self.salary} ")
+        print(f"Employee[id: {self.id},first name: {self.firstname}, last name: {self.lastname}, salary: {self._salary} ")
 
     def calc_net_pay(self):
         tax = self._salary- 0.42
