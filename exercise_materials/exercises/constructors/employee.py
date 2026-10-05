@@ -1,5 +1,5 @@
 class Employee:
-    def __init__(self,firstname,lastname,id,salary,jobtitle):
+    def __init__(self,id,firstname,lastname,salary,jobtitle):
         self.firstname =firstname
         self.lastname = lastname
         self.id = id
@@ -9,7 +9,7 @@ class Employee:
 
 
     def display(self):
-
+        print(f"Employee[ id: {self.id}, first name: {self.firstname}, last name: {self.lastname}, salary: {self._salary}] ")
     def calc_net_pay(self):
         tax = self._salary- 0.42
         take_home = self._salary - tax
