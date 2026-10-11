@@ -24,3 +24,10 @@ class Pizza:
 
     def get_size(self):
         return self.__size
+    def set_size(self,new_size):
+        if new_size in self.size_and_price:
+            self.__size = new_size
+            return True
+        else:
+            return False
+
