@@ -46,4 +46,8 @@ class Pizza:
                 self.__topping.remove(existing_topping)
                 return True
         return False
+    def calc_price(self):
+        base = self.size_and_price[self.__size]
+        topping_price = self.get_num_topping()*0.85
+        return base + topping_price
 
