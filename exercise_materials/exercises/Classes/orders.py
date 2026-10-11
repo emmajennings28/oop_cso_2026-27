@@ -15,5 +15,12 @@ class Pizza:
             self.__size = size
         else:
             self.__size = "Medium"
-            
 
+    def display(self):
+        if self.toppings == 0:
+            print(self.__size + "pizza with no toppings")
+        else:
+            print(self.__size + "pizza with" + ",".join(self.toppings)+"toppings")
+
+    def get_size(self):
+        return self.__size
