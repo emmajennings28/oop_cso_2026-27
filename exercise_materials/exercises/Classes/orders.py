@@ -39,4 +39,10 @@ class Pizza:
         self.__toppings.append(new_topping)
         return True
 
+    def remove_topping(self, topping):
+        for existing_topping in self.__toppings:
+            if existing_topping.lower()== topping.lower():
+                self.__toppings.remove(existing_topping)
+                return True
+        return False
 
