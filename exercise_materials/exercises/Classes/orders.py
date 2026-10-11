@@ -6,21 +6,23 @@ class Pizza:
         "x_large" :16
     }
 
-    toppings = {}
+    __toppings = {}
 
     def __init__(self,toppings, size="Medium"):
-        self.toppings = toppings
+        self.__toppings = toppings
 
         if size in self.size_and_price:
             self.__size = size
         else:
+
+
             self.__size = "Medium"
 
     def display(self):
-        if self.toppings == 0:
+        if len(self.__toppings) == 0:
             print(self.__size + "pizza with no toppings")
         else:
-            print(self.__size + "pizza with" + ",".join(self.toppings)+"toppings")
+            print(self.__size + "pizza with" + ",".join(self.__toppings)+"toppings")
 
     def get_size(self):
         return self.__size
@@ -30,4 +32,11 @@ class Pizza:
             return True
         else:
             return False
+    def get_num_topping(self):
+        return len(self.__toppings)
+
+    def add_topping(self,new_topping):
+        self.__toppings.append(new_topping)
+        return True
+
 
