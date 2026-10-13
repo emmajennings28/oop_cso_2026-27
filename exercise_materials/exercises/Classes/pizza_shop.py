@@ -6,7 +6,7 @@ def expensive_pizza(order):
     most_expensive_pizza = None
     highest_price = 0
     for nickname in order:
-        pizza =order[nickname]
+        pizza = order[nickname]
         price = pizza.calc_price()
 
         if price > highest_price:
@@ -16,8 +16,6 @@ def expensive_pizza(order):
     return most_expensive_name,most_expensive_pizza
 
 def main():
-
-
     order = {}
 
     username = input("please enter your username:")
@@ -35,9 +33,12 @@ def main():
             nickname = input("Enter a different nickname:")
 
         size = input("Enter the pizza size:")
-        size = size.lower()
+        if size.lower() not in ["Small","Medium","Large","X_large"]:
+            new_pizza = Pizza.new_size()
+            return new_pizza
+        else:
+            return False
 
-        toppings = []
         print("Enter 1 topping at a time:")
         print("Press enter to finish")
 
@@ -52,7 +53,7 @@ def main():
         if len(toppings) == 0:
             toppings = ["tomato sauce","cheese"]
 
-        pizza = Pizza(toppings, size)
+        pizza = Pizza(topping, size)
 
         print("Pizza Details")
         print("Nickname:",nickname)
@@ -60,7 +61,7 @@ def main():
         print("Toppings:",",".join(toppings))
 
         order[nickname]=pizza
-        print("Pizza added to your order")
+        print(f"{size} pizza added to your order")
 
     print("Order summary for",username)
     total = 0
@@ -70,14 +71,13 @@ def main():
         print(f"{nickname}€{price}")
         total = total+price
     if len(order) == 0:
-        print("You havent ordered any pizzas")
+        print("You haven't ordered any pizzas")
     else:
         nickname, pizza = expensive_pizza(order)
         print("Most expensive pizza:")
         print("Pizza nickname:",nickname)
-        pizza.display()
-        print(f"Price:€{pizza.calc_price()}")
+        print(f"Price:€ {pizza.calc_price():.2f}")
 
-    print(f"{username}'s total bill is € {total:.2f}")
+    print(f"{username}'s total bill is € {total}")
 if __name__ == "__main__":
     main()
