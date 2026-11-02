@@ -1,5 +1,5 @@
 
-from orders import Pizza
+from orders import Pizza,Orders
 
 def expensive_pizza(order):
     most_expensive_name = None
@@ -14,12 +14,16 @@ def expensive_pizza(order):
             most_expensive_name = nickname
             most_expensive_pizza = pizza
     return most_expensive_name,most_expensive_pizza
+def show_topping_menu():
+    print("Available toppings:")
+    for name, price in Pizza.get_topping_menu().items():
+        print(f"{name} €{price:.2f}")
 
 def main():
     order = {}
 
     username = input("please enter your username:")
-
+    order = Orders(username)
     while True:
         answer = input("Would you like to order a pizza? yes enter(Y/y) or any key for no: ").lower()
 
@@ -28,56 +32,53 @@ def main():
 
         nickname = input("Enter a nickname for your pizza:")
 
-        while nickname in order:
+        while order.get_pizza(nickname)is not None:
             print("nickname already in use, please enter a different nickname:")
             nickname = input("Enter a different nickname:")
+        while True:
+            size = input(f"Enter the pizza size ({', '.join(Pizza.get_sizes())}): ").strip()
+            if Pizza.is_valid_size(size):
+                break
+            print("Invalid size")
 
-        size = input("Enter the pizza size:")
-        if size.lower() not in ["Small","Medium","Large","X_large"]:
-            new_pizza = Pizza.new_size()
-            return new_pizza
-        else:
-            return False
-
+        show_topping_menu()
         print("Enter 1 topping at a time:")
         print("Press enter to finish")
 
+        toppings = list[str]= []
+
         while True:
-            topping = input("Enter a topping:").strip()
+            topping = input("Enter a topping: ").strip().lower()
 
             if topping == "":
                 break
 
-            toppings.append(topping)
+            if not Pizza.is_valid_topping(topping):
+                print("Sorry, that isn't on the menu")
+            elif topping in toppings:
+                print("You already added that topping")
+            else:
+                toppings.append(topping)
 
-        if len(toppings) == 0:
-            toppings = ["tomato sauce","cheese"]
-
-        pizza = Pizza(topping, size)
+        pizza = Pizza(toppings, size)
 
         print("Pizza Details")
-        print("Nickname:",nickname)
-        print("Size:", size)
-        print("Toppings:",",".join(toppings))
+        print("Nickname:", nickname)
+        print("Size:", pizza.get_size())
+        print("Toppings:", ", ".join(toppings) if toppings else "none")
 
-        order[nickname]=pizza
-        print(f"{size} pizza added to your order")
+        order.add_pizza(nickname,pizza)
+        print(f"{pizza.get_size()} pizza added to your order")
+    order.display_order()
 
-    print("Order summary for",username)
-    total = 0
-    for nickname in order:
-        pizza = order[nickname]
-        price = pizza.calc_price()
-        print(f"{nickname}€{price}")
-        total = total+price
-    if len(order) == 0:
-        print("You haven't ordered any pizzas")
-    else:
-        nickname, pizza = expensive_pizza(order)
+    nickname, pizza = expensive_pizza(order)
+    if pizza is not None:
         print("Most expensive pizza:")
-        print("Pizza nickname:",nickname)
-        print(f"Price:€ {pizza.calc_price():.2f}")
+        print("Pizza nickname:", nickname)
+        print(f"Price: €{pizza.calc_price():.2f}")
 
-    print(f"{username}'s total bill is € {total}")
+
+
+
 if __name__ == "__main__":
     main()
