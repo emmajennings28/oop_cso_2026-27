@@ -6,7 +6,7 @@ class Pizza:
         "large" : 15,
         "extra_large" : 18
     }
-    _topping_unit_price: float = 0.85
+    _TOPPING_UNIT_PRICE: float = 0.85
 
     def __init__(self, toppings: list[str], size: str="medium"):
         if size.lower() in Pizza._base_prices:
@@ -79,7 +79,7 @@ class Pizza:
 
     def calc_price(self) -> float:
         base_price = Pizza._base_prices[self._size]
-        topping_price = len(self.toppings) * Pizza._topping_unit_price
+        topping_price = len(self.toppings) * Pizza._TOPPING_UNIT_PRICE
 
         return base_price + topping_price
 

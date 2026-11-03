@@ -1,3 +1,5 @@
+from types import NotImplementedType
+
 
 class Pizza:
     _base_prices:dict[str, float] = {
@@ -99,6 +101,30 @@ class Pizza:
             case _:
                 return str(self)
 
+    def __eq__(self, other: object) -> bool | NotImplementedType:
+        if not isinstance(other, Pizza):
+            return NotImplemented
+
+        if self._size.lower() != other._size.lower():
+            return False
+
+        if self.toppings != other.toppings:
+            return False
+
+        # For a more in-depth comparison that retains function purity
+        # Create a duplicate of each, sort the duplicates and then compare
+        # our_temp_toppings = self.toppings
+        # our_temp_toppings.sort()
+        #
+        # other_temp_toppings = other.toppings
+        # other_temp_toppings.sort()
+        # if our_temp_toppings != other_temp_toppings:
+        #     return False
+
+        return True
+
+    def __ne__(self, other: object) -> bool | NotImplementedType:
+        return not self == other
 
 class Order:
     def __init__(self, username: str):
@@ -175,8 +201,11 @@ if __name__ == "__main__":
     print(f"{pizza1:simple}")
     #pizza1.display()
 
+    print(f"{pizza1 == "hello"}")
+
     pizza2 = Pizza(["ham", "cheese", "pineapple"], "small")
     #pizza2.display()
+    print(pizza1 == pizza2)
 
     pizza3 = Pizza(["cheese"], "large")
     #pizza3.display()

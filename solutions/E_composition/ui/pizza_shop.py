@@ -1,5 +1,5 @@
-from solutions.E_Composition.entities.orders import Pizza
-from solutions.E_Composition.entities.orders import Order
+from solutions.E_composition.entities.orders import Pizza
+from solutions.E_composition.entities.orders import Order
 
 username = input("Enter your username: ")
 order = Order(username)
